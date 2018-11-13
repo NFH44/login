@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>注册</title>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script>
+        function checkuse() {
+            var use = document.getElementById("username");
+            //用户代码不能为空
+            if ($.trim(use.value) == "" ) {
+                alert("用户名不能为空！");
+                return;
+            }
+            if ($.trim(use.value).length < 3) {
+                alert("用户名至少3个字符！");
+                return;
+            }
+        }
+        function checkpw() {
+            var pw = document.getElementById("password");
+            //用户代码不能为空
+            if ($.trim(pw.value) == "" ) {
+                alert("密码不能为空！");
+                return;
+            }
+            if ($.trim(pw.value).length < 3) {
+                alert("密码至少3个字符！");
+                return;
+            }
+        }
+        function checkgen() {
+            var p = document.getElementById("password");
+            var p1 = document.getElementById("password1")
+            var p2 = p.value == p1.value;
+            if (p2){
+                return true;
+            }else {
+                alert('两次密码不一致')
+            }
+        }
+
+        function reg() {
+            var username = $("#username").val();
+            var password = $("#password").val();
+            var password1 = $("#password1").val();
+            var na =document.getElementsByName("gender");
+            var gender="";
+            for(var i=0;i<na.length;i++){
+                if(na[i].checked)
+                    gender=na[i].value;
+                console.info(gender);
+            }
+
+            $.ajax({
+                type: "POST",   //提交的方法
+                url:"/uregies", //提交的地址
+                data:"username="+username+"&password="+password+"&password1="+password1+"&gender="+gender,// 值
+                success: function(data) {  //成功
+                    if(data == "success"){
+                        alert("注册成功");  //就将返回的数据显示出来
+                        location.href="/login";
+                    }else if (data == "error"){
+                        alert("用户名存在");
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body style="text-align: center;">
+    <div style="text-align: right; margin-right: 850px;">
+        用户名:<input type="text" name="username" id="username" onblur="checkuse()"/> <br>
+        密码:<input type="password" name="password" id="password" onblur="checkpw()"/> <br>
+        确认密码:<input type="password" name="password1" id="password1" onblur="checkgen()"/> <br>
+    </div>
+    <div id="ra">
+        性别:<input type="radio" name="gender" value="男" id="nan"/>男
+        <input type="radio" name="gender" value="女" id="nv"/>女
+    </div>
+    <input type="button" id="btn" value="注册" onclick="reg()"/>
+    <input type="button" value="登录" onclick="location.href='/login'"/>
+</body>
+</html>

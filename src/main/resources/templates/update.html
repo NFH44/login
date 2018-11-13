@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>更新</title>
+    <script src="js/jquery-1.10.2.min.js"></script>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+        $(function(){
+            var nati = [[${nation}]];
+            $("#id").val(nati.id);
+            $("#nation").val(nati.nation);
+            $("#name").val(nati.name);
+            $("#port").val(nati.port);
+            $("#ename").val(nati.ename);
+        });
+        /*]]>*/
+        function update() {
+            var checkedIds = $("#id").val();
+            var nation = $("#nation").val();
+            var name = $("#name").val();
+            var port = $("#port").val();
+            var ename = $("#ename").val();
+            $.ajax({
+                url:"update",
+                type:"post",
+                data:"checkedIds="+checkedIds+"&nation="+nation+"&name="+name+"&port="+port+"&ename="+ename,
+                success:function () {
+                    alert("修改成功");
+                    location.href="/listHtml";
+                }
+            })
+        }
+    </script>
+</head>
+<body style="text-align: center;">
+    <div>
+        序号:<input  id="id" readonly="readonly"> <br>
+        国籍:<input  id="nation" value="" type="text"/> <br>
+        国家:<input  id="name" value="" type="text"/> <br>
+        港口:<input  id="port" value="" type="text"/> <br>
+        简称:<input  id="ename" value="" type="text"/> <br>
+        <input type="button" onclick="update()" value="修改">
+    </div>
+</body>
+</html>

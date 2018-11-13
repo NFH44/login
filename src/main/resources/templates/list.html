@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>列表</title>
+    <style>
+        table{
+            margin-left: auto;
+            margin-right: auto;
+        }
+       #btn{
+           margin-left: 730px;
+       }
+    </style>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btn1").on("click",del)
+                .on("click",up)
+        })
+
+        function doCheckedIds() {
+            var checkedIds = "";
+            $('input[name="check"]').each(function () {
+                if ($(this).prop("checked")) {
+                    if (checkedIds == "") {
+                        checkedIds += $(this).val();//id
+                        console.log("checkedIds=" + checkedIds);
+                    } else {
+                        checkedIds += "," + $(this).val();
+                    }
+                }
+            });
+            return checkedIds;
+        }
+
+        function del() {
+            var checkedIds = doCheckedIds();
+            if(checkedIds.length==0){
+                alert("请至少选择一项");
+                return;
+            }
+            var url = "/del";
+            var param = {"checkedIds": checkedIds};
+            $.post(url, param, function () {//回调函数
+                window.location.href = "/listHtml";
+                alert("删除成功");
+            });
+        }
+
+        function up() {
+            var checkedIds = doCheckedIds();
+            if(checkedIds.length==0){
+                alert("请至少选择一项");
+                return;
+            }
+            var url = "/update";
+            var param = {"checkedIds": checkedIds};
+            $.post(url, param, function () {//回调函数
+                window.location.href = "/update.html?checkedIds="+checkedIds;
+            });
+        }
+
+        $(document).ready(function () {
+            $.ajax({
+                url:'/list',
+                type:'post',
+                dataType: "json",
+                success:function(data){
+                    console.log(data);
+                    var item;
+                    $.each(data,function(i,result){
+                        item = "<tr height='50'><td align='center'><input type='checkbox' id='in' name='check' value='"+result["id"]+"'>" +
+                            "</td><td align='center'>"
+                            +result['nation']+"</td><td align='center'>"
+                            +result['name']+"</td><td align='center'>"
+                            +result['port']+"</td><td align='center'>"
+                            +result['ename']+"</td><td align='center'>" +
+                            "<input type='button' id='btn1' onclick='del(this)' value='删除'/>&nbsp;&nbsp;" +
+                            "<input type='button' id='btn2' onclick='up(this)' value='修改'/></td></tr>";
+                        $('.table').append(item);
+                    });
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+
+    <table class="table" width="500"  border="1" align="center" bgcolor="#f5f5dc" rules="all">
+        <tr height="50">
+            <th>选择</th>
+            <th>国籍</th>
+            <th>国家</th>
+            <th>港口</th>
+            <th>简称</th>
+            <th>操作</th>
+        </tr>
+</table>
+    <button type="button" id="btn" value="back" onclick="window.location.href='/nation'">添加</button>
+    <button type="button" onclick="window.location.href='/index'">主页</button>
+</body>
+</html>

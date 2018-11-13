@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>登陆</title>
+    <meta charset="UTF-8" />
+   <script src="js/jquery-1.10.2.min.js"></script>
+    <script>
+        function checkun() {
+            var use = document.getElementById("username");
+            //用户代码不能为空
+            if ($.trim(use.value) == "" ) {
+                alert("用户名不能为空！");
+                return;
+            }
+            if ($.trim(use.value).length < 3) {
+                alert("用户名至少3个字符！");
+                return;
+            }
+        }
+        function checkpwd() {
+            var pw = document.getElementById("password");
+            //用户代码不能为空
+            if ($.trim(pw.value) == "" ) {
+                alert("密码不能为空！");
+                return;
+            }
+            if ($.trim(pw.value).length < 3) {
+                alert("密码至少3个字符！");
+                return;
+            }
+        }
+      function login() {
+            var name =$("#username").val();
+            var pwd = $("#password").val();
+           $.ajax({
+               type: "POST",
+               url: "/ulogin",
+               data: "username="+name+"&password="+pwd,
+               success: function(data){
+                   if(data == "success"){
+                       alert("登录成功："+name);
+                       location.href="index";
+                   }else if (data == "error"){
+                       alert("用户不存在或密码错误");
+                   }
+               }
+           });
+       }
+       function regies() {
+           location.href="/regies";
+       }
+    </script>
+
+</head>
+
+<body style="text-align: center;">
+<form action="/login" method="post">
+    账号:<input type="text" name="username" id="username" onblur="checkun()"/> <br>
+    密码:<input type="password" name="password" id="password" onblur="checkpwd()"/> <br>
+    <input type="button" value="登陆" onclick="login()"/>
+    <input type="button" value="注册" onclick="regies()"/>
+</form>
+</body>
+</html>

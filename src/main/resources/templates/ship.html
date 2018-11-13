@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查询船只</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/popper.js/dist/umd/popper.min.js" ></script>
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>-->
+    <script src="../js/ship/ship.js"></script>
+    <script src="../js/page.js"></script>
+</head>
+<body style="background-color: #66ccff;">
+<!--插入模态框-->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- 模态框头部 -->
+            <div class="modal-header">
+                <h4 class="modal-title">添加战舰信息</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- 模态框主体 -->
+            <div class="modal-body">
+                <form class="form-inline" role="form" id="myFrom">
+                    <div class="form-group" id="nations">
+                        <label for="sel1">国籍:</label>
+                        <select class="form-control opt" id="sel1" name="nationId" style="width: 400px">
+                            <option value="" selected="selected">请选择</option>
+                        </select>
+                    </div>
+                        <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="shipName" class=" control-label">舰名</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="shipName" class="form-control" id="shipName" style="width: 300px">
+                        </div>
+                    </div>&emsp;
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="Lv" class=" control-label">等级</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="Lv" class="form-control"  id="Lv" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="shipType" class=" control-label">类型</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="shipType" class="form-control"  id="shipType" style="width: 300px">
+                        </div>
+                    </div>&emsp;
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="Price" class=" control-label">造价</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="Price" class="form-control" id="Price" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="DP" class=" control-label">DP</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="DP" class="form-control" id="DP" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="Displacement" class=" control-label">排水</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="Displacement" class="form-control" id="Displacement" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="Soldier" class=" control-label">兵位</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="Soldier" class="form-control" id="Soldier" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="Pos" class=" control-label">在舰兵位</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="Pos" class="form-control" id="Pos" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="Aid" class=" control-label">辅助位</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="Aid" class="form-control" id="Aid" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="lowSpeed" class=" control-label">低速</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="lowSpeed" class="form-control" id="lowSpeed" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="extSpeed" class=" control-label">极速</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="extSpeed" class="form-control" id="extSpeed" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="note" class=" control-label">备注</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="note" class="form-control" id="note" style="width: 300px">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 模态框底部 -->
+            <div class="modal-footer">
+                <button id="save" type="submit" class="btn btn-secondary" data-dismiss="modal" onclick="insert()">保存</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--更新模态框-->
+<div class="modal fade" id="myModalAndUpdate">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- 模态框头部 -->
+            <div class="modal-header">
+                <h4 class="modal-title">更新或删除</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- 模态框主体 -->
+            <div class="modal-body">
+                <form class="form-inline update" role="form">
+                    <input type="hidden" id="id" value="">
+                    <div class="form-group form-label">
+                        <label for="nation">国籍:</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="nation" class="form-control" id="nation"
+                                  disabled="disabled" style="width: 400px" value="">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="shipNames" class=" control-label">舰名</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="shipName" class="form-control" id="shipNames" style="width: 300px">
+                        </div>
+                    </div>&emsp;
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="Lvs" class=" control-label">等级</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="Lv" class="form-control"  id="Lvs" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="shipTypes" class=" control-label">类型</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="shipType" class="form-control"  id="shipTypes" style="width: 300px">
+                        </div>
+                    </div>&emsp;
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="Prices" class=" control-label">造价</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="Price" class="form-control" id="Prices" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="DPs" class=" control-label">DP</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="DP" class="form-control" id="DPs" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="Displacements" class=" control-label">排水</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="Displacement" class="form-control" id="Displacements" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="Soldiers" class=" control-label">兵位</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="Soldier" class="form-control" id="Soldiers" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="Poss" class=" control-label">在舰兵位</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="Pos" class="form-control" id="Poss" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="Aids" class=" control-label">辅助位</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="Aid" class="form-control" id="Aids" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="lowSpeeds" class=" control-label">低速</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="lowSpeed" class="form-control" id="lowSpeeds" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="extSpeeds" class=" control-label">极速</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="extSpeed" class="form-control" id="extSpeeds" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="notes" class=" control-label">备注</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="note" class="form-control" id="notes" style="width: 300px">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 模态框底部 -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="del()">删除</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="update()">更新</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<span class="navbar-text" style="text-align:center; display: block; font-size: 55px">
+    NF
+</span>
+<nav class="navbar bg-light" style="float: left; left: 200px">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="/index" style="font-size: 33px" >主页</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" style="font-size: 33px" data-toggle="modal" data-target="#myModal">新增</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" style="font-size: 33px" onclick="select()">查找</a>
+        </li>
+        <li class="nav-item">
+            <!--<a class="nav-link" href="#" style="font-size: 33px" onclick="del()">删除</a>-->
+        </li>
+    </ul>
+</nav>
+</div>
+<div style="float: left; margin-left: 291px;">
+    <div class="input-group">
+        <span class="input-group-addon" style="margin-top: 5px">国籍：</span>
+        <select class="form-control opt" id="regionId" name="regionId" style="width: 300px">
+            <option value="" selected="selected">请选择</option>
+        </select>
+
+        <select class="form-control" id="list" name="list" style="margin-left: 120px;width: 165px">
+            <option value="0" selected="selected" >按名字搜索</option>
+            <option value="1">按等级搜索</option>
+            <option value="2">按类型搜索</option>
+            <option value="3">按获取方式搜索</option>
+        </select>
+        <input type="text" name="condition"  class="form-control cls" id="condition"
+               style="width: 300px;margin-bottom: 1px" onblur="checks()">
+        <button class="btn btn-default" type="button" style="margin-bottom: 1px" onclick="selectShip()">搜索</button>
+    </div>
+</div>
+
+<div style="float: left; margin-left: 340px;margin-bottom: 1px">
+    <table class="table table-bordered">
+        <thead style="font-size: 29px">
+        <tr style="text-align: center;">
+            <th>国籍</th>
+            <th>船名</th>
+            <th>等级</th>
+            <th>类型</th>
+            <th>造价</th>
+            <th>DP</th>
+            <th>排水</th>
+            <th>兵位</th>
+            <th>在舰</th>
+            <th>辅助位</th>
+            <th>低速</th>
+            <th>极速</th>
+            <th>备注</th>
+        </tr>
+        </thead>
+        <tbody style="font-size: 29px;text-align: center;" id="tb" >
+        </tbody>
+    </table>
+    <div class="container" style="margin-left: 300px">
+        <!--<ul class="pagination" style="">
+            <li class="page-item"><a class="page-link" href="#" onclick="uppage(this)">上一页</a></li>
+            <li class="page-item active"><a class="page-link size" href="#">1</a></li>
+            <li class="page-item"><a class="page-link size" href="#">2</a></li>
+            <li class="page-item"><a class="page-link size" href="#">3</a></li>
+            <li class="page-item"><a class="page-link " href="#" onclick="nextpage(this)">下一页</a></li>
+        </ul>
+        <span id="page"></span>-->
+        <ul style="list-style: none">
+            <li class="page_li" style="float: left">
+                <button class="page_btn" style="width:100px" id="prePage">上一页</button>
+            </li>
+            <li class="page_li" style="float: left">
+                <button class="page_btn" style="width: 33px" id="page_btn1">1</button>
+            </li>
+            <li class="page_li" style="float: left">
+                <span class="pages_span" id="prePoint">...</span>
+            </li>
+            <li class="page_li" style="float: left">
+                <button class="page_btn" id="page_btn2"></button>
+            </li>
+            <li class="page_li" style="float: left">
+                <button class="page_btn" id="page_btn3"></button>
+            </li>
+            <li class="page_li" style="float: left">
+                <button class="page_btn" id="page_btn4"></button>
+            </li>
+            <li class="page_li" style="float: left">
+                <button class="page_btn" id="page_btn5"></button>
+            </li>
+            <li class="page_li" style="float: left">
+                <button class="page_btn" id="page_btn6"></button>
+            </li>
+            <li class="page_li" style="float: left">
+                <span class="pages_span" id="sufPoint">...</span>
+            </li>
+            <li class="page_li" style="float: left">
+                <button class="page_btn" id="page_btn7"></button>
+            </li>
+            <li class="page_li" style="float: left">
+                <button class="page_btn" style="width:100px" id="sufPage">下一页</button>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

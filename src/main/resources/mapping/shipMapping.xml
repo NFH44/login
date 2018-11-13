@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.dao.ShipDao">
+
+    <resultMap id="result" type="com.test.entity.Ship">
+        <result column="id" property="id" jdbcType="INTEGER" />
+        <result column="nationId" property="nationId" jdbcType="INTEGER" />
+        <result column="shipName" property="shipName" jdbcType="VARCHAR" />
+        <result column="Lv" property="Lv" jdbcType="INTEGER" />
+        <result column="shipType" property="shipType" jdbcType="VARCHAR" />
+        <result column="Price" property="Price" jdbcType="DOUBLE" />
+        <result column="DP" property="DP" jdbcType="INTEGER" />
+        <result column="Displacement" property="Displacement" jdbcType="INTEGER" />
+        <result column="Soldier" property="Soldier" jdbcType="INTEGER" />
+        <result column="Pos" property="Pos" jdbcType="INTEGER" />
+        <result column="Aid" property="Aid" jdbcType="INTEGER" />
+        <result column="lowSpeed" property="lowSpeed" jdbcType="INTEGER" />
+        <result column="extSpeed" property="extSpeed" jdbcType="INTEGER" />
+        <result column="note" property="note" jdbcType="VARCHAR" />
+   </resultMap>
+
+        <insert id="insert"  parameterType="com.test.entity.Ship">
+           INSERT INTO ship VALUES (
+           #{id},#{nationId},#{shipName},#{Lv},#{shipType},
+           #{Price},#{DP},#{Displacement},#{Soldier},#{Pos},
+           #{Aid},#{lowSpeed},#{extSpeed},#{note})
+        </insert>
+    <!--  查询总页数-->
+      <select id="pageCount" resultType="int">
+          SELECT COUNT(*) FROM ship
+      </select>
+
+  <select id="findAll" resultMap="result">
+      SELECT s.*
+      FROM ship s,nation n
+      WHERE s.nationId = n.id
+      and n.id = #{id}
+      limit #{page.pageNo},#{page.pageSize}
+  </select>
+
+  <update id="update" parameterType="com.test.entity.Ship">
+      UPDATE ship
+      SET nationId=#{nationId},shipName=#{shipName},Lv=#{Lv},shipType=#{shipType},
+     Price=#{Price},DP=#{DP},Displacement=#{Displacement},Soldier=#{Soldier},Pos=#{Pos},
+     Aid=#{Aid},lowSpeed=#{lowSpeed},extSpeed=#{extSpeed},note=#{note}
+     WHERE id=#{id}
+  </update>
+
+  <delete id="delete" parameterType="int">
+      DELETE FROM ship WHERE id=#{id}
+  </delete>
+
+  <select id="findByNaionIdAndShipName" resultType="com.test.entity.Ship">
+    SELECT s.*
+    FROM ship s,nation n
+    WHERE s.nationId = n.id
+    and n.id = #{id}
+    and s.shipName LIKE "%"#{shipName}"%"
+  </select>
+<!--总条数-->
+    <select id="findCountAndShipName" resultType="int">
+      SELECT COUNT(*)
+      FROM nation n,
+      (SELECT *
+        FROM ship
+        WHERE shipName LIKE "%"#{shipName}"%") as s
+        where s.nationId = n.id
+        and n.id=#{id}
+    </select>
+
+         <select id="findByNaionIdAndLv" resultType="com.test.entity.Ship" parameterType="int">
+             SELECT s.*
+             FROM ship s,nation n
+             WHERE s.nationId = n.id
+             and n.id = #{id}
+             and s.Lv LIKE concat(concat(#{Lv}),'%')
+
+         </select>
+
+            <select id="findByNaionIdAndShipType" resultType="com.test.entity.Ship">
+                SELECT s.*
+                FROM ship s,nation n
+                WHERE s.nationId = n.id
+                and n.id = #{id}
+                and s.shipType LIKE #{shipType}"%"
+            </select>
+
+            <select id="findByNaionIdAndNote" resultType="com.test.entity.Ship">
+                SELECT s.*
+                FROM ship s,nation n
+                WHERE s.nationId = n.id
+                and n.id = #{id}
+                and s.note LIKE "%"#{note}"%"
+            </select>
+</mapper>

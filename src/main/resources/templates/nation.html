@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>国籍</title>
+    <style>
+        body {
+            width: 293px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script>
+
+    </script>
+</head>
+<body style="text-align: center;">
+    <form action="/nation" method="post">
+        国籍:<input type="text" name="nation"/> <br>
+        国家:<input type="text" name="name"/> <br>
+        港口:<input type="text" name="port"/> <br>
+        简称:<input type="text" name="ename"/>    <br>
+        <input type="submit" value="提交" onclick="alert('添加成功')"/>
+        <input type="button" value="查询" onclick="window.location.href='/listHtml'"/>
+    </form>
+</body>
+</html>
