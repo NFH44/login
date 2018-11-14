@@ -250,19 +250,22 @@
 <div style="float: left; margin-left: 291px;">
     <div class="input-group">
         <span class="input-group-addon" style="margin-top: 5px">国籍：</span>
-        <select class="form-control opt" id="regionId" name="regionId" style="width: 300px">
+        <select class="form-control opt" id="regionId" name="regionId" style="width: 121px">
             <option value="" selected="selected">请选择</option>
         </select>
 
-        <select class="form-control" id="list" name="list" style="margin-left: 120px;width: 165px">
-            <option value="0" selected="selected" >按名字搜索</option>
-            <option value="1">按等级搜索</option>
-            <option value="2">按类型搜索</option>
-            <option value="3">按获取方式搜索</option>
-        </select>
-        <input type="text" name="condition"  class="form-control cls" id="condition"
-               style="width: 300px;margin-bottom: 1px" onblur="checks()">
-        <button class="btn btn-default" type="button" style="margin-bottom: 1px" onclick="selectShip()">搜索</button>
+        <span style="margin-left:15px ;margin-top: 8px">舰名:</span>
+        <input type="text" name="queryName"  class="form-control cls" id="queryName"
+               style="">
+        <span style="margin-left:15px; margin-top: 8px">等级:</span>
+        <input type="text" name="queryLv"  class="form-control cls" id="queryLv"
+               style="">
+        <span style="margin-left:15px;margin-top: 8px">类型:</span>
+        <input type="text" name="queryType"  class="form-control cls" id="queryType"
+               style="">
+        <span style="margin-left:15px;margin-top: 8px">备注:</span>
+        <input type="text" name="queryNote"  class="form-control cls" id="queryNote"
+               style="">
     </div>
 </div>
 
@@ -289,49 +292,17 @@
         </tbody>
     </table>
     <div class="container" style="margin-left: 300px">
-        <!--<ul class="pagination" style="">
-            <li class="page-item"><a class="page-link" href="#" onclick="uppage(this)">上一页</a></li>
-            <li class="page-item active"><a class="page-link size" href="#">1</a></li>
-            <li class="page-item"><a class="page-link size" href="#">2</a></li>
-            <li class="page-item"><a class="page-link size" href="#">3</a></li>
-            <li class="page-item"><a class="page-link " href="#" onclick="nextpage(this)">下一页</a></li>
+        <span style="float: left;margin-top: 8px">共</span>
+        <span id="spanPage" style="float: left;margin-top: 8px">0</span>
+        <span style="float: left;margin-top: 8px;margin-right: 10px">条</span>
+        <ul class="pagination" style="">
+            <li class="page-item prev"><a class="page-link" href="#">上一页</a></li>
+            <li class="page-item size"><a class="page-link" href="#">1</a></li>
+            <li class="page-item size"><a class="page-link" href="#">2</a></li>
+            <li class="page-item size"><a class="page-link" href="#">3</a></li>
+            <li class="page-item next"><a class="page-link" href="#">下一页</a></li>
         </ul>
-        <span id="page"></span>-->
-        <ul style="list-style: none">
-            <li class="page_li" style="float: left">
-                <button class="page_btn" style="width:100px" id="prePage">上一页</button>
-            </li>
-            <li class="page_li" style="float: left">
-                <button class="page_btn" style="width: 33px" id="page_btn1">1</button>
-            </li>
-            <li class="page_li" style="float: left">
-                <span class="pages_span" id="prePoint">...</span>
-            </li>
-            <li class="page_li" style="float: left">
-                <button class="page_btn" id="page_btn2"></button>
-            </li>
-            <li class="page_li" style="float: left">
-                <button class="page_btn" id="page_btn3"></button>
-            </li>
-            <li class="page_li" style="float: left">
-                <button class="page_btn" id="page_btn4"></button>
-            </li>
-            <li class="page_li" style="float: left">
-                <button class="page_btn" id="page_btn5"></button>
-            </li>
-            <li class="page_li" style="float: left">
-                <button class="page_btn" id="page_btn6"></button>
-            </li>
-            <li class="page_li" style="float: left">
-                <span class="pages_span" id="sufPoint">...</span>
-            </li>
-            <li class="page_li" style="float: left">
-                <button class="page_btn" id="page_btn7"></button>
-            </li>
-            <li class="page_li" style="float: left">
-                <button class="page_btn" style="width:100px" id="sufPage">下一页</button>
-            </li>
-        </ul>
+        <span id="page"></span>
     </div>
 </div>
 </body>

@@ -1,6 +1,6 @@
-package com.test.dao;
+package com.test.ship.dao;
 
-import com.test.entity.Ship;
+import com.test.ship.entity.Ship;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

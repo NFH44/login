@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.test.dao.UserDao">
+<mapper namespace="com.test.user.dao.UserDao">
     <select id="findByUsernameAndPassword" parameterType="map"
-            resultType="com.test.entity.User">
+            resultType="com.test.user.entity.User">
         SELECT username,password
         FROM user
         WHERE username=#{username}
         AND password=#{password}
     </select>
 
-    <select id="findByUsername" parameterType="com.test.entity.User" resultType="com.test.entity.User">
+    <select id="findByUsername" parameterType="com.test.user.entity.User" resultType="com.test.user.entity.User">
         SELECT * FROM user WHERE username = #{username}
     </select>
 
-    <insert id="insert1" parameterType="com.test.entity.User">
+    <insert id="insert1" parameterType="com.test.user.entity.User">
        INSERT INTO user VALUES (#{id},#{username},#{password},#{gender})
     </insert>
 </mapper>

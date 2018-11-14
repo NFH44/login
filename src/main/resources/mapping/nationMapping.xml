@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.test.dao.NationDao">
-    <select id="findByNation" parameterType="String" resultType="com.test.entity.Nation">
+<mapper namespace="com.test.nation.dao.NationDao">
+    <select id="findByNation" parameterType="String" resultType="com.test.nation.entity.Nation">
         SELECT nation
         FROM nation
         WHERE nation=#{nation}
     </select>
 
-    <select id="findById" parameterType="int" resultType="com.test.entity.Nation">
+    <select id="findById" parameterType="int" resultType="com.test.nation.entity.Nation">
         SELECT *
         FROM nation
         WHERE id = #{id}
     </select>
-    <select id="findAll" resultType="com.test.entity.Nation">
+    <select id="findAll" resultType="com.test.nation.entity.Nation">
         SELECT *
         FROM nation
     </select>
 
-    <insert id="insert"  parameterType="com.test.entity.Nation">
+    <insert id="insert"  parameterType="com.test.nation.entity.Nation">
        INSERT INTO nation VALUES (#{id},#{nation},#{name},#{port},#{ename})
     </insert>
 
@@ -25,7 +25,7 @@
       DELETE FROM nation WHERE id=#{id}
     </delete>
 
-    <update id="update" parameterType="com.test.entity.Nation">
+    <update id="update" parameterType="com.test.nation.entity.Nation">
         UPDATE nation
         SET nation=#{nation},name=#{name},port=#{port},ename=#{ename}
         WHERE id=#{id}

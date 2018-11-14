@@ -1,6 +1,6 @@
-package com.test.service;
+package com.test.nation.service;
 
-import com.test.entity.Nation;
+import com.test.nation.entity.Nation;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

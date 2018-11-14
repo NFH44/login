@@ -1,6 +1,6 @@
-package com.test.dao;
+package com.test.user.dao;
 
-import com.test.entity.User;
+import com.test.user.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserDao {

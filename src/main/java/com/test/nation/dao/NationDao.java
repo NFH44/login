@@ -1,6 +1,6 @@
-package com.test.dao;
+package com.test.nation.dao;
 
-import com.test.entity.Nation;
+import com.test.nation.entity.Nation;
 
 import java.util.List;
 

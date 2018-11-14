@@ -1,8 +1,8 @@
-package com.test.service.impl;
+package com.test.nation.service.impl;
 
-import com.test.dao.NationDao;
-import com.test.entity.Nation;
-import com.test.service.NationService;
+import com.test.nation.dao.NationDao;
+import com.test.nation.entity.Nation;
+import com.test.nation.service.NationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

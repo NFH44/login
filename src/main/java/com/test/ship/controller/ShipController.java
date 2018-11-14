@@ -1,14 +1,17 @@
-package com.test.controller;
+package com.test.ship.controller;
 
-import com.test.entity.Page;
-import com.test.entity.Ship;
-import com.test.service.ShipService;
+import com.test.ship.entity.Ship;
+import com.test.ship.service.ShipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ShipController {
@@ -49,19 +52,6 @@ public class ShipController {
         }
         shipService.insert(ship);
         return "添加成功";
-    }
-
-    @RequestMapping("/ship")
-    @ResponseBody
-    public  List<Ship> ship(@RequestParam("id") int id,
-                            @RequestParam("pageSize") int pageSize,
-                            @RequestParam("pageNo") int pageNo){
-        Page page = new Page();
-        page.setPageSize(pageSize);
-        page.setPageNo(pageNo);
-        int i = shipService.pageCount();
-        List<Ship> list = shipService.findAll(id,page);
-        return list;
     }
 
     @RequestMapping("shipList")
@@ -113,43 +103,40 @@ public class ShipController {
     @ResponseBody
     public String shipDelete(@RequestParam("id") int id){
         System.out.println("===================="+id);
-        shipService.deltet(id);
+        shipService.delete(id);
         return "删除成功";
     }
 
-    @RequestMapping("/selectNaionIdAndShipName")
+    @RequestMapping("/ship")
     @ResponseBody
-    public List<Ship> selectNaionIdAndShipName(
-            @RequestParam("id") int id,
-            @RequestParam("shipName") String shipName){
-        List<Ship> list = shipService.findByNaionIdAndShipName(id,shipName);
+    public  List<Ship> ship(@RequestParam (required = true) Map<String, Object> map,
+                            HttpServletRequest request, HttpServletResponse response){
+
+        String id = map.get("id").toString();
+        String shipName = map.get("shipName").toString();
+        String Lv = map.get("Lv").toString();
+        String shipType = map.get("shipType").toString();
+        String note = map.get("note").toString();
+        String sortName = map.get("sortName").toString();
+        String sortOrder = map.get("sortOrder").toString();
+        String currPageIndex = map.get("currPageIndex").toString();
+        String currPageSize = map.get("currPageSize").toString();
+
+        List<Ship> list = shipService.findAll(map);
         return list;
     }
 
-    @RequestMapping("/selectNaionIdAndLv")
+    @RequestMapping("/count")
     @ResponseBody
-    public List<Ship> selectNaionIdAndLv(
-            @RequestParam("id") int id,
-            @RequestParam("Lv") int Lv){
-        List<Ship> list = shipService.findByNaionIdAndLv(id,Lv);
-        return list;
-    }
+    public  Integer count(@RequestParam(required = true) Map<String, Object> map){
+        String id = map.get("id").toString();
+        String shipName = map.get("shipName").toString();
+        String Lv = map.get("Lv").toString();
+        String shipType = map.get("shipType").toString();
+        String note = map.get("note").toString();
 
-    @RequestMapping("/selectNaionIdAndShipType")
-    @ResponseBody
-    public List<Ship> selectNaionIdAndShipType(
-            @RequestParam("id") int id,
-            @RequestParam("shipType") String shipType){
-        List<Ship> list = shipService.findByNaionIdAndShipType(id,shipType);
-        return list;
-    }
+        Integer list = shipService.queryAllCount(map);
 
-    @RequestMapping("/selectNaionIdAndNote")
-    @ResponseBody
-    public List<Ship> selectNaionIdAndNote(
-            @RequestParam("id") int id,
-            @RequestParam("note") String note){
-        List<Ship> list = shipService.findByNaionIdAndNote(id,note);
         return list;
     }
 }

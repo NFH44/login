@@ -1,4 +1,4 @@
-package com.test.entity;
+package com.test.ship.entity;
 
 public class Ship {
     //id

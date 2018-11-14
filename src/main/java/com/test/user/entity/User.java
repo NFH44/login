@@ -1,4 +1,4 @@
-package com.test.entity;
+package com.test.user.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

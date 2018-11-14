@@ -1,4 +1,4 @@
-package com.test.entity;
+package com.test.nation.entity;
 
 public class Nation {
     private int id;
