@@ -41,7 +41,7 @@ public class NationController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public List<Nation> getAll(){
+    public List<Nation> list(){
         List<Nation> list = nationService.findAll();
         System.out.println(list);
         return list;
