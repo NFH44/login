@@ -109,8 +109,7 @@ public class ShipController {
 
     @RequestMapping("/ship")
     @ResponseBody
-    public  List<Ship> ship(@RequestParam (required = true) Map<String, Object> map,
-                            HttpServletRequest request, HttpServletResponse response){
+    public  List<Ship> ship(@RequestParam (required = true) Map<String, Object> map){
 
         String id = map.get("id").toString();
         String shipName = map.get("shipName").toString();

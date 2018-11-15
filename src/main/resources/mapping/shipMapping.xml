@@ -18,7 +18,7 @@
   </update>
 
   <delete id="delete" parameterType="int">
-      DELETE FROM ship WHERE id=#{id}
+      DELETE FROM gun WHERE id=#{id}
   </delete>
 
     <!--  查询总页数-->
@@ -70,6 +70,5 @@
         <if test="queryMap.currPageIndex != null and queryMap.currPageIndex !='' and queryMap.currPageSize != null and queryMap.currPageSize !=''">
             limit ${queryMap.currPageIndex},${queryMap.currPageSize}
         </if>
-
     </select>
 </mapper>

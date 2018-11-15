@@ -44,15 +44,10 @@ var curNum;
 function count() {
     var da = "id="+$("#regionId").val()+"&shipName="+$("#queryName").val()+"&Lv="+$("#queryLv").val()
         +"&shipType="+$("#queryType").val()+"&note="+$("#queryNote").val();
-    $.ajax({
-        url:"/count",
-        type:"post",
-        data:da,
-        success:function (data) {
-            curNum = data;
-            $("#spanPage").text(data);
-        }
-    })
+    ajaxs.ajax("/count",da,function (data) {
+        curNum = data;
+        $("#spanPage").text(data);
+    });
 }
 
 //查询战舰
@@ -65,13 +60,12 @@ function select() {
     var currPageIndex = 0;
     var currPageSize = 10;
     var des = "asc";
-    var dataa ="id="+$("#regionId").val()+"&shipName="+$("#queryName").val()+"&Lv="+$("#queryLv").val()
+    var vas ="id="+$("#regionId").val()+"&shipName="+$("#queryName").val()+"&Lv="+$("#queryLv").val()
     +"&shipType="+$("#queryType").val()+"&note="+$("#queryNote").val()+"&sortName="+$("input[name='Lv']").attr("id")
     +"&sortOrder="+des+"&currPageIndex="+currPageIndex+"&currPageSize="+currPageSize;
 
-    ajaxs.ajax("/ship",""+dataa+"",callback);
+    ajaxs.ajax("/ship",vas,callback);
     count();
-
 }
 
 function callback(data) {
