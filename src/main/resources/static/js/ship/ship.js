@@ -40,16 +40,6 @@ var ajaxs = {
     }
 }
 
-var curNum;
-function count() {
-    var da = "id="+$("#regionId").val()+"&shipName="+$("#queryName").val()+"&Lv="+$("#queryLv").val()
-        +"&shipType="+$("#queryType").val()+"&note="+$("#queryNote").val();
-    ajaxs.ajax("/count",da,function (data) {
-        curNum = data;
-        $("#spanPage").text(data);
-    });
-}
-
 //查询战舰
 function select() {
     $("#span").hide();
@@ -59,19 +49,23 @@ function select() {
     }
     var currPageIndex = 0;
     var currPageSize = 10;
+        $(".container a").click(function () {
+            $(this).text();
+        })
+
+
     var des = "asc";
     var vas ="id="+$("#regionId").val()+"&shipName="+$("#queryName").val()+"&Lv="+$("#queryLv").val()
     +"&shipType="+$("#queryType").val()+"&note="+$("#queryNote").val()+"&sortName="+$("input[name='Lv']").attr("id")
     +"&sortOrder="+des+"&currPageIndex="+currPageIndex+"&currPageSize="+currPageSize;
 
     ajaxs.ajax("/ship",vas,callback);
-    count();
 }
 
 function callback(data) {
         console.info(data);
         $(".table tr:not(:first)").empty();
-        $.each(data,function(i,result){
+        $.each(data[0],function(i,result){
             var trs = $("#tb");
             if (result["note"] == null){
                 result["note"]="";
@@ -82,9 +76,20 @@ function callback(data) {
                 result["pos"]+"</td><td>"+result["aid"]+"</td><td>"+result["lowSpeed"]+"</td><td>"+
                 result["extSpeed"]+"</td><td>"+result["note"]+"</td></tr>";
             trs.append(sh);
+
+            for (var i=0;i<data.length;i++){
+                if (i == 1){
+                    var toPage = data[i];
+                    $("#spanPage").text(toPage)
+                }else if(i == 2){
+                    var curNum = data[i];
+                    $("#toPage").text(curNum);
+                }
+            }
         })
         pri();
 }
+
 //添加战舰
 $(function () {
     $.each(datas, function (i, res) {

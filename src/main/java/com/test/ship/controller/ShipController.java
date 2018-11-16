@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -121,21 +122,16 @@ public class ShipController {
         String currPageIndex = map.get("currPageIndex").toString();
         String currPageSize = map.get("currPageSize").toString();
 
+        int size = Integer.parseInt(currPageSize);
+        int totle = shipService.queryAllCount(map);
+        int curnum = (totle+size-1)/size;
+        System.out.println(curnum+"++++++++++++++");
+        List ls = new ArrayList();
         List<Ship> list = shipService.findAll(map);
-        return list;
-    }
-
-    @RequestMapping("/count")
-    @ResponseBody
-    public  Integer count(@RequestParam(required = true) Map<String, Object> map){
-        String id = map.get("id").toString();
-        String shipName = map.get("shipName").toString();
-        String Lv = map.get("Lv").toString();
-        String shipType = map.get("shipType").toString();
-        String note = map.get("note").toString();
-
-        Integer list = shipService.queryAllCount(map);
-
-        return list;
+        ls.add(list);
+        ls.add(totle);
+        ls.add(curnum);
+        System.out.println(ls);
+        return ls;
     }
 }
