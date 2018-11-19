@@ -25,6 +25,7 @@
             <!-- 模态框主体 -->
             <div class="modal-body">
                 <form class="form-inline" role="form" id="myFrom">
+                    <input type="hidden" id="id" value="">
                     <div class="form-group" id="nations">
                         <label for="sel1">国籍:</label>
                         <select class="form-control opt" id="sel1" name="nationId" style="width: 400px">
@@ -73,10 +74,10 @@
 
             <!-- 模态框底部 -->
             <div class="modal-footer">
-                <button id="save" type="submit" class="btn btn-secondary" data-dismiss="modal" onclick="inser(),update()">保存</button>
+                <button id="save" type="submit" class="btn btn-secondary" data-dismiss="modal" onclick="inser()">保存</button>
+                <button id="up" type="submit" class="btn btn-secondary" data-dismiss="modal" onclick="update()">更新</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
             </div>
-
         </div>
     </div>
 </div>
@@ -140,7 +141,7 @@
             <th>备注</th>
         </tr>
         </thead>
-        <tbody style="font-size: 29px;text-align: center;" id="tb">
+        <tbody style="font-size: 29px;text-align: center;" id="tb" onclick="cli()">
         </tbody>
     </table>
 

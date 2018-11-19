@@ -38,6 +38,7 @@ public class GunController {
     public String gunUpdate(@RequestParam Map<String, Object> map){
 
         map.get("id").toString();
+        map.get("nationId").toString();
         map.get("gunName").toString();
         map.get("Lv").toString();
         map.get("Price").toString();

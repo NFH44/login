@@ -9,17 +9,20 @@
     <update id="update"  parameterType="com.test.gun.entity.Gun">
         UPDATE gun
         <set>
-            nationId=#{nationId},
-            gunName=#{gunName},
-            Lv=#{Lv},
-            Price=#{Price},
-            caliber=#{caliber},
-            gunType=#{gunType},
-            note=#{note}s
+            nationId=#{queryMap.nationId},
+            gunName=#{queryMap.gunName},
+            Lv=#{queryMap.Lv},
+            Price=#{queryMap.Price},
+            caliber=#{queryMap.caliber},
+            gunType=#{queryMap.gunType},
+            note=#{queryMap.note}
         </set>
-        WHERE id = #{id}
+        WHERE id = #{queryMap.id}
     </update>
 
+    <delete id="delete" parameterType="String">
+        DELETE FROM gun WHERE id=#{id}
+    </delete>
     <!--列表-->
     <select id="queryList" resultType="com.test.gun.entity.Gun">
         SELECT g.*

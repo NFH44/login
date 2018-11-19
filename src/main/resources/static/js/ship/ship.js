@@ -49,10 +49,10 @@ function select() {
     }
     var currPageIndex = 0;
     var currPageSize = 10;
-        $(".container a").click(function () {
-            $(this).text();
-        })
 
+    $(".container a").click(function () {
+        $(this).text();
+    })
 
     var des = "asc";
     var vas ="id="+$("#regionId").val()+"&shipName="+$("#queryName").val()+"&Lv="+$("#queryLv").val()
@@ -64,6 +64,9 @@ function select() {
 
 function callback(data) {
         console.info(data);
+        if (data[0] == null){
+            $("#span").show();
+        }
         $(".table tr:not(:first)").empty();
         $.each(data[0],function(i,result){
             var trs = $("#tb");

@@ -18,8 +18,6 @@ $(document).ready(function () {
                     ids = $("#regionId").val();
                     if (ids == result["id"]){
                         na = result["name"];
-                        console.info(na);
-                        console.info(ids);
                     }
                 })
             })
@@ -41,6 +39,7 @@ function count() {
         }
     })
 }
+
 /*查询*/
 function query() {
     $("#span").hide();
@@ -87,8 +86,6 @@ $(function () {
             var ids = $("#sel1").val();
             if (ids == res["id"]) {
                 na = res["name"];
-                console.info(na);
-                console.info(ids);
             }
         })
     })
@@ -96,9 +93,10 @@ $(function () {
 
 
 function inser() {
-    $('#myModal').modal();
+    $("a").click(function () {
+        $("#up").hide()
+    })
     var vas = $("#myFrom").serialize();
-    console.info(vas);
     $.ajax({
         url:"/gunInsert",
         type:"post",
@@ -113,45 +111,42 @@ function inser() {
 /*更新*/
 function cli() {
     $(".table > tbody > tr").click(function () {
-        /*$('#myModal').modal();
-        $('h4 .modal-title').html("修改装备信息");*/
-        var ids = $(this).attr("id");
-        alert(ids)
+        $("#myModal").modal("show");
+        $("#save").hide();
+        var lsid = $(this).attr("id");
         var col = $(this).find("td").length;
         var arr = new Array();
         for(var i=0;i<col;i++){
             arr.push($(this).children().eq(i).text());
         }
-        console.info(arr);
-        /*$("#id").val(ids);
-        $("#sel1").val(arr[0]);
+        $("#id").val(lsid);
+        $("#sel1").val(ids);
         $("#gunName").val(arr[1]);
         $("#Lv").val(arr[2]);
         $("#Price").val(arr[3]);
         $("#caliber").val(arr[4]);
         $("#gunType").val(arr[5]);
-        $("#note").val(arr[6]);*/
+        $("#note").val(arr[6]);
     });
 };
 function update() {
-    var id = $("#sel1").val();
-    console.info(id);
-    var vas = $(".update").serialize();
-    //console.info(vas)
+    var id = $("#id").val();
+    var vas = $("#myFrom").serialize();
     $.ajax({
         url:"/gunUpdate",
         type:"post",
-        data:"id="+id+"&nationId="+ids+"&"+vas,
+        data:"id="+id+"&"+vas,
         success:function (data) {
             alert(data);
-            select();
+            query();
         }
     })
 }
 
 //删除信息
 function gunDel() {
-
+    var id = $("#id").val();
+    alert(id)
     $.ajax({
         url:"/gunDelete",
         type:"post",
