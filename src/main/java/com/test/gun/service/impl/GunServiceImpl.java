@@ -22,15 +22,28 @@ public class GunServiceImpl implements GunService{
     }
 
     @Override
-    public Integer delete(String id) {
-        return gunDao.delete(id);
+    public String delete(String id) {
+        List<Gun> list =  gunDao.findById(id);
+        if (list.size()<=0){
+            return "未找到该记录";
+        }else {
+            gunDao.delete(id);
+        }
+        return "删除成功";
     }
 
     @Override
-    public Integer update(Map<String, Object> queryMap) {
-        Integer i = gunDao.update(queryMap);
-        return i;
+    public String update(Map<String, Object> queryMap) {
+        Gun gun = new Gun();
+        List<?> list = findByGunName(gun.getGunName());
+        if (list.size() <= 0){
+            return "未找到该记录";
+        }else {
+            gunDao.update(queryMap);
+        }
+        return "更新成功";
     }
+
 
     @Override
     public List<Gun> queryList(Map<String, Object> queryMap) {
@@ -41,6 +54,22 @@ public class GunServiceImpl implements GunService{
     @Override
     public Integer queryListCount(Map<String, Object> queryMap) {
         Integer list =gunDao.queryListCount(queryMap);
+        return list;
+    }
+
+    @Override
+    public List<Gun> findById(String id) {
+        List<Gun> list = gunDao.findById(id);
+        if (list ==null){
+            return list;
+        }else {
+            return list;
+        }
+    }
+
+    @Override
+    public List<Gun> findByGunName(String gunName) {
+        List<Gun> list = gunDao.findByGunName(gunName);
         return list;
     }
 }

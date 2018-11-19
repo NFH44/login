@@ -7,8 +7,10 @@ import java.util.Map;
 
 public interface GunDao {
     int insert(Gun gun);
-    Integer update(@Param("queryMap") Map<String, Object> queryMap);
-    Integer delete(@Param("id") String id);
+    String update(@Param("queryMap") Map<String, Object> queryMap);
+    String delete(@Param("id") String id);
     List<Gun> queryList(@Param("queryMap") Map<String, Object> queryMap);
     Integer queryListCount(@Param("queryMap") Map<String, Object> queryMap);
+    List<Gun> findById(@Param("id") String id);
+    List<Gun> findByGunName(@Param("gunName") String gunName);
 }

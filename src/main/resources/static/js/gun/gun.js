@@ -60,7 +60,12 @@ function query() {
         type:"post",
         data:sav,
         success:function (data) {
-            console.info(data)
+            console.info(data);
+            if (data == 0){
+                $("#span").show();
+            }else {
+                $("#span").hide();
+            }
             $(".table tr:not(:first)").empty();
             $.each(data,function(i,result){
                 var trs = $("#tb");
@@ -93,6 +98,7 @@ $(function () {
 
 
 function inser() {
+    $("input").val("").focus();
     $("a").click(function () {
         $("#up").hide()
     })
@@ -103,6 +109,7 @@ function inser() {
         data:vas,
         success:function (data) {
             alert(data);
+            query();
         }
     })
 }

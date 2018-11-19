@@ -42,7 +42,6 @@ var ajaxs = {
 
 //查询战舰
 function select() {
-    $("#span").hide();
     if($("#regionId").val() == ""){
         alert("选择国籍");
         return;
@@ -64,8 +63,10 @@ function select() {
 
 function callback(data) {
         console.info(data);
-        if (data[0] == null){
+        if (data[0] == 0){
             $("#span").show();
+        }else {
+            $("#span").hide();
         }
         $(".table tr:not(:first)").empty();
         $.each(data[0],function(i,result){

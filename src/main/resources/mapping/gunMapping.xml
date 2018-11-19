@@ -23,6 +23,20 @@
     <delete id="delete" parameterType="String">
         DELETE FROM gun WHERE id=#{id}
     </delete>
+
+    <select id="findById" resultType="com.test.gun.entity.Gun" parameterType="String">
+        SELECT g.*
+        FROM gun g,nation n
+        WHERE g.nationId = n.id
+        AND g.id =#{id}
+    </select>
+
+    <select id="findByGunName" resultType="com.test.gun.entity.Gun" parameterType="String">
+        SELECT g.*
+        FROM gun g,nation n
+        WHERE g.nationId = n.id
+        AND g.gunName =#{gunName}
+    </select>
     <!--列表-->
     <select id="queryList" resultType="com.test.gun.entity.Gun">
         SELECT g.*
