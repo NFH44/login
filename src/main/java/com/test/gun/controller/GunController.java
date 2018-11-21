@@ -15,10 +15,12 @@ import java.util.Map;
 public class GunController {
     @Autowired
     private GunService gunService;
+
     @RequestMapping("gun")
     public String gun(){
         return "gun";
     }
+
     @RequestMapping("gunInsert")
     @ResponseBody
     public String gunInsert(Gun gun){
