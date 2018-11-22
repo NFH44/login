@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.armour.dao.ArmDao">
+
+    <insert id="armAdd"  parameterType="com.test.armour.entity.Armour">
+       INSERT INTO armour VALUES (#{id},#{nationId},#{armName},#{kg},#{price},#{APdefense},#{HEdefense},
+       #{waterCabin},#{torpedo})
+    </insert>
+
+    <update id="armUpdate"  parameterType="com.test.armour.entity.Armour">
+        UPDATE armour
+        <set>
+            nationId=#{nationId},
+            armName=#{armName},
+            kg=#{kg},
+            price=#{price},
+            APdefense=#{APdefense},
+            HEdefense=#{HEdefense},
+            watercabin=#{waterCabin},
+            torpedo=#{torpedo}
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="armDelete" parameterType="String">
+        DELETE FROM armour WHERE id=#{id}
+    </delete>
+
+    <select id="queryById" resultType="com.test.armour.entity.Armour" parameterType="String">
+        SELECT a.*
+        FROM armour a,nation n
+        WHERE a.nationId = n.id
+        AND a.id =#{id}
+    </select>
+
+    <select id="findByGunName" resultType="com.test.gun.entity.Gun" parameterType="String">
+        SELECT g.*
+        FROM gun g,nation n
+        WHERE g.nationId = n.id
+        AND g.gunName =#{gunName}
+    </select>
+    <!--列表-->
+    <select id="queryList" resultType="com.test.armour.entity.Armour">
+        SELECT a.*
+        FROM armour a,nation n
+        WHERE a.nationId = n.id
+        <if test="queryMap.id != null and queryMap.id !='' ">
+            and n.id = #{queryMap.id}
+        </if>
+        <if test="queryMap.armName != null and queryMap.armName !='' ">
+            and a.armName like '%${queryMap.armName}%'
+        </if>
+        <!-- 排序，分页 -->
+        <if test="queryMap.sortName != null and queryMap.sortName !='' and queryMap.sortOrder != null and queryMap.sortOrder !=''">
+            order by ${queryMap.sortName} ${queryMap.sortOrder}
+        </if>
+        <if test="queryMap.currPageIndex != null and queryMap.currPageIndex !='' and queryMap.currPageSize != null and queryMap.currPageSize !=''">
+            limit ${queryMap.currPageIndex},${queryMap.currPageSize}
+        </if>
+    </select>
+    <!--条数-->
+    <select id="queryListCount" resultType="int">
+        select IFNULL(count(1),0)
+        FROM armour a,nation n
+        WHERE a.nationId = n.id
+        <if test="queryMap.id != null and queryMap.id !='' ">
+            and n.id = #{queryMap.id}
+        </if>
+        <if test="queryMap.armName != null and queryMap.armName !='' ">
+            and a.armName like '%${queryMap.armName}%'
+        </if>
+    </select>
+
+</mapper>
