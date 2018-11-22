@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.plane.dao.PlaneDao">
+
+    <insert id="planeAdd"  parameterType="com.test.plane.entity.Plane">
+       INSERT INTO plane VALUES (#{id},#{nationId},#{planeName},#{kg},#{lv},#{price},#{attribute},
+       #{dp},#{speed},#{oil},#{radarRange},#{fireRange},#{time})
+    </insert>
+
+    <update id="planeUpdate"  parameterType="com.test.plane.entity.Plane">
+        UPDATE plane
+        <set>
+            nationId=#{nationId},
+            planeName=#{planeName},
+            kg=#{kg},
+            lv=#{lv},
+            price=#{price},
+            attribute=#{attribute},
+            DP=#{dp},
+            speed=#{speed},
+            oil=#{oil},
+            radarRange=#{radarRange},
+            fireRange=#{fireRange},
+            time=#{time}
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="planeDelete" parameterType="String">
+        DELETE FROM plane WHERE id=#{id}
+    </delete>
+
+    <select id="queryById" resultType="com.test.armour.entity.Armour" parameterType="String">
+        SELECT a.*
+        FROM armour a,nation n
+        WHERE a.nationId = n.id
+        AND a.id =#{id}
+    </select>
+
+    <select id="findByGunName" resultType="com.test.gun.entity.Gun" parameterType="String">
+        SELECT g.*
+        FROM gun g,nation n
+        WHERE g.nationId = n.id
+        AND g.gunName =#{gunName}
+    </select>
+    <!--列表-->
+    <select id="queryList" resultType="com.test.plane.entity.Plane">
+        SELECT p.*
+        FROM plane p,nation n
+        WHERE p.nationId = n.id
+        <if test="queryMap.id != null and queryMap.id !='' ">
+            and n.id = #{queryMap.id}
+        </if>
+        <if test="queryMap.planeName != null and queryMap.planeName !='' ">
+            and p.planeName like '%${queryMap.planeName}%'
+        </if>
+        <if test="queryMap.lv != null and queryMap.lv !='' ">
+            and p.lv like '%${queryMap.lv}%'
+        </if>
+        <if test="queryMap.attribute != null and queryMap.attribute !='' ">
+            and p.attribute like '%${queryMap.attribute}%'
+        </if>
+        <!-- 排序，分页 -->
+        <if test="queryMap.sortName != null and queryMap.sortName !='' and queryMap.sortOrder != null and queryMap.sortOrder !=''">
+            order by ${queryMap.sortName} ${queryMap.sortOrder}
+        </if>
+        <if test="queryMap.currPageIndex != null and queryMap.currPageIndex !='' and queryMap.currPageSize != null and queryMap.currPageSize !=''">
+            limit ${queryMap.currPageIndex},${queryMap.currPageSize}
+        </if>
+    </select>
+    <!--条数-->
+    <select id="queryListCount" resultType="int">
+        select IFNULL(count(1),0)
+        FROM plane p,nation n
+        WHERE p.nationId = n.id
+        <if test="queryMap.id != null and queryMap.id !='' ">
+            and n.id = #{queryMap.id}
+        </if>
+        <if test="queryMap.planeName != null and queryMap.planeName !='' ">
+            and p.planeName like '%${queryMap.planeName}%'
+        </if>
+        <if test="queryMap.lv != null and queryMap.lv !='' ">
+            and p.lv like '%${queryMap.lv}%'
+        </if>
+        <if test="queryMap.attribute != null and queryMap.attribute !='' ">
+            and p.attribute like '%${queryMap.attribute}%'
+        </if>
+    </select>
+
+</mapper>

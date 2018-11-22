@@ -9,7 +9,7 @@
     <update id="update"  parameterType="com.test.torpedo.entity.Torpedo">
         UPDATE torpedo
         <set>
-            nation_id=#{nationId},
+            nationId=#{nationId},
             name=#{name},
             lv=#{lv},
             price=#{price},
@@ -27,7 +27,7 @@
     <select id="queryById" resultType="com.test.torpedo.entity.Torpedo" parameterType="String">
         SELECT t.*
         FROM torpedo t,nation n
-        WHERE t.nation_id = n.id
+        WHERE t.nationId = n.id
         AND t.id =#{id}
     </select>
 
@@ -41,7 +41,7 @@
     <select id="queryList" resultType="com.test.torpedo.entity.Torpedo">
         SELECT t.*
         FROM torpedo t,nation n
-        WHERE t.nation_id = n.id
+        WHERE t.nationId = n.id
         <if test="queryMap.id != null and queryMap.id !='' ">
             and n.id = #{queryMap.id}
         </if>
@@ -69,7 +69,7 @@
     <select id="queryListCount" resultType="int">
         select IFNULL(count(1),0)
         FROM torpedo t,nation n
-        WHERE t.nation_id = n.id
+        WHERE t.nationId = n.id
         <if test="queryMap.id != null and queryMap.id !='' ">
             and n.id = #{queryMap.id}
         </if>

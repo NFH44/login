@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>装甲</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/popper.js/dist/umd/popper.min.js" ></script>
+    <script src="../js/plane/plane.js"></script>
+</head>
+<body style="background-color: #EB7347;">
+<!--插入模态框-->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- 模态框头部 -->
+            <div class="modal-header">
+                <h4 class="modal-title">添加信息</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- 模态框主体 -->
+            <div class="modal-body">
+                <form class="form-inline" role="form" id="myFrom">
+                    <input type="hidden" id="id" value="">
+                    <div class="form-group" id="nations">
+                        <label for="sel1">国籍:</label>
+                        <select class="form-control opt" id="sel1" name="nationId" style="width: 400px">
+                            <option value="" selected="selected">请选择</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="planeName" class=" control-label">名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="planeName" class="form-control"  id="planeName" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="kg" class=" control-label">重量</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="kg" class="form-control"  id="kg" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="lv" class=" control-label">等级</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="lv" class="form-control"  id="lv" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="price" class=" control-label">价格</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="price" class="form-control"  id="price" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="attribute" class=" control-label">属性</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="attribute" class="form-control"  id="attribute" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="dp" class=" control-label">耐久</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="dp" class="form-control"  id="dp" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="speed" class=" control-label">航速</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="speed" class="form-control"  id="speed" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="oil" class=" control-label">燃油</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="oil" class="form-control"  id="oil" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="radarRange" class=" control-label">雷达范围</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="radarRange" class="form-control"  id="radarRange" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="fireRange" class=" control-label">火力范围</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="fireRange" class="form-control"  id="fireRange" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="time" class=" control-label">飞行时间</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="time" class="form-control"  id="time" style="width: 300px">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 模态框底部 -->
+            <div class="modal-footer">
+                <button id="save" type="submit" class="btn btn-secondary" data-dismiss="modal" onclick="enter()">确定</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--顶部-->
+<span class="navbar-text" style="text-align:center; display: block; font-size: 55px">
+    舰载机
+</span>
+<!--侧边-->
+<nav class="navbar bg-light" style="float: left; left: 200px">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="/index" style="font-size: 33px" >主页</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="adds" href="#" style="font-size: 33px" data-toggle="modal" data-target="#myModal">新增</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" style="font-size: 33px" onclick="queryPlane()">查找</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" style="font-size: 33px" onclick="planeDelete()">删除</a>
+        </li>
+    </ul>
+</nav>
+<!--搜索-->
+<div style="float: left; margin-left: 239px;">
+    <div class="input-group">
+        <span class="input-group-addon" style="margin-top: 5px">国籍：</span>
+        <select class="form-control opt" id="regionId" name="regionId" style="width: 200px">
+            <option value="" selected="selected">请选择</option>
+        </select>
+        <span style="margin-left:150px ;margin-top: 8px">装备名:</span>
+        <input type="text" name="queryName"  class="form-control cls" id="queryName"
+               style="width: 200px">
+        <span style="margin-left:100px ;margin-top: 8px">等级:</span>
+        <input type="text" name="queryLv"  class="form-control cls" id="queryLv"
+               style="width: 200px">
+        <span style="margin-left:100px ;margin-top: 8px">舰载机类型:</span>
+        <input type="text" name="queryAtt"  class="form-control cls" id="queryAtt"
+               style="width: 200px">
+    </div>
+</div>
+<!--列表-->
+<div style=" margin-left: 340px;margin-bottom: 1px;margin-right: 30px">
+    <table class="table table-bordered">
+        <thead style="font-size: 29px">
+        <tr style="text-align: center;">
+            <th>国籍</th>
+            <th>名称</th>
+            <th>重量</th>
+            <th>造价</th>
+            <th>等级</th>
+            <th>属性</th>
+            <th>耐久</th>
+            <th>航速</th>
+            <th>燃油</th>
+            <th>雷达范围</th>
+            <th>火力范围</th>
+            <th>飞行时间</th>
+        </tr>
+        </thead>
+        <tbody style="font-size: 29px;text-align: center;" id="tb" onclick="planeQuery()">
+        </tbody>
+    </table>
+    <span id="span" style="text-align: center;display:block">暂无数据</span>
+    <div class="container" style="margin-left: 300px">
+        <span style="float: left;margin-top: 8px">共</span>
+        <span id="spanPage" style="float: left;margin-top: 8px">0</span>
+        <span style="float: left;margin-top: 8px;margin-right: 10px">条</span>
+
+        <span style="float: left;margin-top: 8px">共</span>
+        <span id="toPage" style="float: left;margin-top: 8px">0</span>
+        <span style="float: left;margin-top: 8px;margin-right: 10px">页</span>
+
+        <ul class="pagination" style="">
+            <li class="page-item prev"><a class="page-link" href="#">上一页</a></li>
+            <li class="page-item size"><a class="page-link" href="#">1</a></li>
+            <li class="page-item size"><a class="page-link" href="#">2</a></li>
+            <li class="page-item size"><a class="page-link" href="#">3</a></li>
+            <li class="page-item next"><a class="page-link" href="#">下一页</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

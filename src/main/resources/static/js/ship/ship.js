@@ -50,7 +50,8 @@ function select() {
     var currPageSize = 10;
 
     $(".container a").click(function () {
-        $(this).text();
+        var pa = $(this).text();
+        console.info(pa);
     })
 
     var des = "asc";

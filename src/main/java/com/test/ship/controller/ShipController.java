@@ -112,7 +112,7 @@ public class ShipController {
     @ResponseBody
     public  List<Ship> ship(@RequestParam (required = true) Map<String, Object> map){
 
-        String id = map.get("id").toString();
+        //String id = map.get("id").toString();
         String shipName = map.get("shipName").toString();
         String Lv = map.get("Lv").toString();
         String shipType = map.get("shipType").toString();

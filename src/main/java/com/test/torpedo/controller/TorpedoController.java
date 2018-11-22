@@ -54,7 +54,7 @@ public class TorpedoController {
     @RequestMapping("torpedoList")
     @ResponseBody
     public List<Torpedo> torpedoList(@RequestParam Map<String, Object> map){
-        String id = map.get("id").toString();
+        //String id = map.get("id").toString();
         String name = map.get("name").toString();
         map.get("lv").toString();
         map.get("amount").toString();
@@ -70,6 +70,7 @@ public class TorpedoController {
 
         List ls = new ArrayList<>();
         List<Torpedo> list = torpedoService.queryList(map);
+        System.out.println(list);
         ls.add(list);
         ls.add(totle);
         ls.add(curnum);
