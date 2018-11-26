@@ -73,8 +73,9 @@ function query() {
                     result["note"]="";
                 }
                 var sh = "<tr id='"+result["id"]+"'><td>"+na+"</td><td>"+result["gunName"]+"</td><td>"+
-                    result["lv"]+"</td><td>"+result["price"]+"</td><td>"+result["caliber"]+"</td><td>"+
-                    result["gunType"]+"</td><td>"+result["note"]+"</td></tr>";
+                    result["lv"]+"</td><td>"+result["angle"]+"</td><td>"+result["rotSpeet"]+"</td><td>"+
+                    result["loadTime"]+"</td><td>"+result["muzzV"]+"</td><td>"+result["price"]+"</td><td>"+
+                    result["caliber"]+"</td><td>"+result["gunType"]+"</td><td>"+result["note"]+"</td></tr>";
                 trs.append(sh);
             })
         }
@@ -130,10 +131,14 @@ function cli() {
         $("#sel1").val(ids);
         $("#gunName").val(arr[1]);
         $("#Lv").val(arr[2]);
-        $("#Price").val(arr[3]);
-        $("#caliber").val(arr[4]);
-        $("#gunType").val(arr[5]);
-        $("#note").val(arr[6]);
+        $("#angle").val(arr[3]);
+        $("#rotSpeet").val(arr[4]);
+        $("#loadTime").val(arr[5]);
+        $("#muzzV").val(arr[6]);
+        $("#Price").val(arr[7]);
+        $("#caliber").val(arr[8]);
+        $("#gunType").val(arr[9]);
+        $("#note").val(arr[10]);
     });
 };
 function update() {

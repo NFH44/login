@@ -42,7 +42,10 @@ public class GunController {
         map.get("id").toString();
         map.get("nationId").toString();
         map.get("gunName").toString();
-        map.get("Lv").toString();
+        map.get("angle").toString();
+        map.get("rotSpeet").toString();
+        map.get("loadTime").toString();
+        map.get("muzzV").toString();
         map.get("Price").toString();
         map.get("caliber").toString();
         map.get("gunType").toString();

@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>装备</title>
+    <title>装甲</title>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="../js/jquery-1.10.2.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/popper.js/dist/umd/popper.min.js" ></script>
-    <script src="../js/gun/gun.js"></script>
+    <script src="../js/navy/navy.js"></script>
 </head>
-<body style="background-color: #D24D57;">
+<body style="background-color: #EE82EE;">
 <!--插入模态框-->
 <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-lg">
@@ -18,7 +18,7 @@
 
             <!-- 模态框头部 -->
             <div class="modal-header">
-                <h4 class="modal-title">添加装备信息</h4>
+                <h4 class="modal-title">添加信息</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
@@ -33,63 +33,87 @@
                         </select>
                     </div>
                     <div class="form-group form-label" style="margin-top: 20px">
-                        <label for="gunName" class=" control-label">装备名称</label>
+                        <label for="job" class=" control-label">职业</label>
                         <div class="col-sm-10">
-                            <input type="text" name="gunName" class="form-control" id="gunName" style="width: 300px">
-                        </div>
-                    </div>&emsp;
-                    <div class="form-group form-label" style="margin-top: 20px">
-                        <label for="Lv" class=" control-label">等级</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="Lv" class="form-control"  id="Lv" style="width: 300px">
+                            <input type="text" name="job" class="form-control"  id="job" style="width: 300px">
                         </div>
                     </div>
                     <div class="form-group form-label" style="margin-top: 20px">
-                        <label for="angle" class=" control-label">最大角度</label>
+                        <label for="lv" class=" control-label">等级</label>
                         <div class="col-sm-10">
-                            <input type="text" name="angle" class="form-control"  id="angle" style="width: 300px">
+                            <input type="text" name="lv" class="form-control"  id="lv" style="width: 300px">
                         </div>
                     </div>
                     <div class="form-group form-label" style="margin-top: 20px">
-                        <label for="rotSpeet" class=" control-label">转速</label>
+                        <label for="coin" class=" control-label">点数</label>
                         <div class="col-sm-10">
-                            <input type="text" name="rotSpeet" class="form-control"  id="rotSpeet" style="width: 300px">
+                            <input type="text" name="coin" class="form-control"  id="coin" style="width: 300px">
                         </div>
                     </div>
                     <div class="form-group form-label" style="margin-top: 20px">
-                        <label for="loadTime" class=" control-label">装填时间</label>
+                        <label for="latent" class=" control-label">潜在</label>
                         <div class="col-sm-10">
-                            <input type="text" name="loadTime" class="form-control"  id="loadTime" style="width: 300px">
+                            <input type="text" name="latent" class="form-control"  id="latent" style="width: 300px">
                         </div>
                     </div>
                     <div class="form-group form-label" style="margin-top: 20px">
-                        <label for="muzzV" class=" control-label">炮口初速</label>
+                        <label for="hit" class=" control-label">命中</label>
                         <div class="col-sm-10">
-                            <input type="text" name="muzzV" class="form-control"  id="muzzV" style="width: 300px">
+                            <input type="text" name="hit" class="form-control"  id="hit" style="width: 300px">
                         </div>
                     </div>
                     <div class="form-group form-label" style="margin-top: 20px">
-                        <label for="Price" class=" control-label">造价</label>
+                        <label for="reload" class=" control-label">装填</label>
                         <div class="col-sm-10">
-                            <input type="text" name="Price" class="form-control" id="Price" style="width: 300px">
+                            <input type="text" name="reload" class="form-control"  id="reload" style="width: 300px">
                         </div>
                     </div>
                     <div class="form-group form-label" style="margin-top: 20px">
-                        <label for="caliber" class=" control-label">口径</label>
+                        <label for="torpedo" class=" control-label">鱼雷</label>
                         <div class="col-sm-10">
-                            <input type="text" name="caliber" class="form-control" id="caliber" style="width: 300px">
+                            <input type="text" name="torpedo" class="form-control"  id="torpedo" style="width: 300px">
                         </div>
                     </div>
                     <div class="form-group form-label" style="margin-top: 20px">
-                        <label for="gunType" class=" control-label">类型</label>
+                        <label for="AA" class=" control-label">防空</label>
                         <div class="col-sm-10">
-                            <input type="text" name="gunType" class="form-control"  id="gunType" style="width: 300px">
+                            <input type="text" name="AA" class="form-control"  id="AA" style="width: 300px">
                         </div>
-                    </div>&emsp;
+                    </div>
                     <div class="form-group form-label" style="margin-top: 20px">
-                        <label for="note" class=" control-label">备注</label>
+                        <label for="repair" class=" control-label">修理</label>
                         <div class="col-sm-10">
-                            <input type="text" name="note" class="form-control" id="note" style="width: 300px">
+                            <input type="text" name="repair" class="form-control"  id="repair" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="mending" class=" control-label">修补</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="mending" class="form-control"  id="mending" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="machine" class=" control-label">轮机</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="machine" class="form-control"  id="machine" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="scout" class=" control-label">侦查</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="scout" class="form-control"  id="scout" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="plane" class=" control-label">战斗</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="plane" class="form-control"  id="plane" style="width: 300px">
+                        </div>
+                    </div>
+                    <div class="form-group form-label" style="margin-top: 20px">
+                        <label for="bomb" class=" control-label">轰炸</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="bomb" class="form-control"  id="bomb" style="width: 300px">
                         </div>
                     </div>
                 </form>
@@ -97,8 +121,7 @@
 
             <!-- 模态框底部 -->
             <div class="modal-footer">
-                <button id="save" type="submit" class="btn btn-secondary" data-dismiss="modal" onclick="inser()">保存</button>
-                <button id="up" type="submit" class="btn btn-secondary" data-dismiss="modal" onclick="update()">更新</button>
+                <button id="save" type="submit" class="btn btn-secondary" data-dismiss="modal" onclick="enter()">确定</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
             </div>
         </div>
@@ -106,7 +129,7 @@
 </div>
 <!--顶部-->
 <span class="navbar-text" style="text-align:center; display: block; font-size: 55px">
-    装备
+    水兵
 </span>
 <!--侧边-->
 <nav class="navbar bg-light" style="float: left; left: 200px">
@@ -115,13 +138,13 @@
             <a class="nav-link" href="/index" style="font-size: 33px" >主页</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" style="font-size: 33px" data-toggle="modal" data-target="#myModal">新增</a>
+            <a class="nav-link" id="adds" href="#" style="font-size: 33px" data-toggle="modal" data-target="#myModal">新增</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" style="font-size: 33px" onclick="query()">查找</a>
+            <a class="nav-link" href="#" style="font-size: 33px" onclick="queryNavy()">查找</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" style="font-size: 33px" onclick="gunDel()">删除</a>
+            <a class="nav-link" href="#" style="font-size: 33px" onclick="navyDelete()">删除</a>
         </li>
     </ul>
 </nav>
@@ -129,46 +152,40 @@
 <div style="float: left; margin-left: 239px;">
     <div class="input-group">
         <span class="input-group-addon" style="margin-top: 5px">国籍：</span>
-        <select class="form-control opt" id="regionId" name="regionId" style="width: 100px">
+        <select class="form-control opt" id="regionId" name="regionId" style="width: 200px">
             <option value="" selected="selected">请选择</option>
         </select>
-
-        <span style="margin-left:15px ;margin-top: 8px">装备名:</span>
-        <input type="text" name="queryName"  class="form-control cls" id="queryName"
-               style="">
-        <span style="margin-left:15px; margin-top: 8px">等级:</span>
+        <span style="margin-left:150px ;margin-top: 8px">职业:</span>
+        <input type="text" name="job"  class="form-control cls" id="queryJob"
+               style="width: 200px">
+        <span style="margin-left:100px ;margin-top: 8px">等级:</span>
         <input type="text" name="queryLv"  class="form-control cls" id="queryLv"
-               style="">
-        <span style="margin-left:15px; margin-top: 8px">口径:</span>
-        <input type="text" name="queryCali"  class="form-control cls" id="queryCali"
-               style="">
-        <span style="margin-left:15px;margin-top: 8px">类型:</span>
-        <input type="text" name="queryType"  class="form-control cls" id="queryType"
-               style="">
-        <span style="margin-left:15px;margin-top: 8px">备注:</span>
-        <input type="text" name="queryNote"  class="form-control cls" id="queryNote"
-               style="">
+               style="width: 200px">
     </div>
 </div>
 <!--列表-->
-<div style=" margin-left: 340px;margin-bottom: 1px;margin-right: 50px">
+<div style=" margin-left: 340px;margin-bottom: 1px;margin-right: 30px">
     <table class="table table-bordered">
         <thead style="font-size: 29px">
         <tr style="text-align: center;">
             <th>国籍</th>
-            <th>名称</th>
+            <th>职业</th>
             <th>等级</th>
-            <th>最大角度</th>
-            <th>转速</th>
-            <th>装填时间</th>
-            <th>炮口初速</th>
-            <th>造价</th>
-            <th>口径</th>
-            <th>类型</th>
-            <th>备注</th>
+            <th>点数</th>
+            <th>潜在</th>
+            <th>命中</th>
+            <th>装填</th>
+            <th>鱼雷</th>
+            <th>防空</th>
+            <th>修理</th>
+            <th>修补</th>
+            <th>轮机</th>
+            <th>侦查</th>
+            <th>战斗</th>
+            <th>轰炸</th>
         </tr>
         </thead>
-        <tbody style="font-size: 29px;text-align: center;" id="tb" onclick="cli()">
+        <tbody style="font-size: 29px;text-align: center;" id="tb" onclick="NavyQuery()">
         </tbody>
     </table>
     <span id="span" style="text-align: center;display:block">暂无数据</span>

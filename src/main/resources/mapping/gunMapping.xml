@@ -3,7 +3,8 @@
 <mapper namespace="com.test.gun.dao.GunDao">
 
     <insert id="insert"  parameterType="com.test.gun.entity.Gun">
-       INSERT INTO gun VALUES (#{id},#{nationId},#{gunName},#{Lv},#{Price},#{caliber},#{gunType},#{note})
+       INSERT INTO gun VALUES (#{id},#{nationId},#{gunName},#{Lv},#{angle},#{rotSpeet},#{loadTime},#{muzzV},
+       #{Price},#{caliber},#{gunType},#{note})
     </insert>
 
     <update id="update"  parameterType="com.test.gun.entity.Gun">
@@ -12,6 +13,10 @@
             nationId=#{queryMap.nationId},
             gunName=#{queryMap.gunName},
             Lv=#{queryMap.Lv},
+            angle=#{queryMap.angle},
+            rotSpeet=#{queryMap.rotSpeet},
+            loadTime=#{queryMap.loadTime},
+            muzzV=#{queryMap.muzzV},
             Price=#{queryMap.Price},
             caliber=#{queryMap.caliber},
             gunType=#{queryMap.gunType},
