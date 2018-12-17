@@ -89,4 +89,12 @@ public class GunController {
         System.out.println(list);
         return list;
     }
+
+    @RequestMapping("queryListPage")
+    @ResponseBody
+    public List<Gun> queryListPage(@RequestParam Integer pageNo,
+                                 @RequestParam Integer pageSize){
+
+        return gunService.queryListPage(pageNo,pageSize);
+    }
 }

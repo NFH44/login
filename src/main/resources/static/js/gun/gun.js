@@ -48,15 +48,24 @@ function query() {
         return;
     }
 
-    var currPageIndex = 0;
-    var currPageSize = 10;
+
+    var pageNo = 1;
+    $(".container a").click(function () {
+        var pa = $(this).text();
+        if (pa == "下一页"){
+            pageNo++;
+            console.info(pageNo);
+        }
+    })
+    var pageSize = 10;
+
     var des = "asc";
     var sav ="id="+$("#regionId").val()+"&gunName="+$("#queryName").val()+"&Lv="+$("#queryLv").val()+"&caliber="+$("#queryCali").val()
         +"&gunType="+$("#queryType").val()+"&note="+$("#queryNote").val()+"&sortName="+$("input[name='Lv']").attr("id")
-        +"&sortOrder="+des+"&currPageIndex="+currPageIndex+"&currPageSize="+currPageSize;
+        +"&sortOrder="+des+"&currPageIndex="+pageNo+"&currPageSize="+pageSize+"&pageNo="+pageNo+"&pageSize="+pageSize;
 
     $.ajax({
-        url:"/queryList",
+        url:"/queryListPage",
         type:"post",
         data:sav,
         success:function (data) {
@@ -166,6 +175,20 @@ function gunDel() {
         success:function (data) {
             alert(data);
             query();
+        }
+    })
+}
+
+function gunPageList() {
+    var pageNo = 1;
+    var pageSize = 10;
+    $.ajax({
+        url:"/queryListPage",
+        type:"post",
+        data:"pageNo="+pageNo+"&pageSize="+pageSize,
+        success:function (data) {
+            $("#tt").val(data);
+            console.info(data);
         }
     })
 }

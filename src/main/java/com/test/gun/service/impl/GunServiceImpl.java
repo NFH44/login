@@ -1,11 +1,14 @@
 package com.test.gun.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.test.gun.dao.GunDao;
 import com.test.gun.entity.Gun;
 import com.test.gun.service.GunService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +33,17 @@ public class GunServiceImpl implements GunService{
             gunDao.delete(id);
         }
         return "删除成功";
+    }
+
+    @Override
+    public List<Gun> queryListPage(int pageNo, int pageSize) {
+        PageHelper.startPage(pageNo,pageSize);
+        Map<String,Object> map = new HashMap<>();
+        List<Gun> list = queryList(map);
+        int countNums = queryListCount(map);
+        com.test.demo.PageInfo<Gun> page = new com.test.demo.PageInfo<>(pageNo,pageSize,countNums);
+        page.setItems(list);
+        return page.getItems();
     }
 
     @Override
